@@ -5,7 +5,6 @@ const User = require("./../models/User");
 
 router.get("/signup", (req, res) => {
   res.render("signup");
-
 });
 
 router.post("/signup", (req, res, next) => {
@@ -35,6 +34,41 @@ router.post("/signup", (req, res, next) => {
 
 router.get("/signin", (req, res) => {
   res.render("signin");
+});
+
+router.post("/signin", (req, res, next) => {
+  User
+    .findOne({ email: req.body.email })
+    .then(dbRes => {
+
+      if(!dbRes) {
+        // TODO "Login error"
+        res.redirect("/auth/signin");
+        return;
+      }
+
+      if (bcrypt.compareSync(req.body.password, dbRes.password)) {
+        delete dbRes.password;
+        req.session.currentUser = dbRes;
+        res.redirect("/manager/all");
+      } else {
+        // Wrong password
+        // TODO "Login error"
+        res.redirect("/auth/signin");
+      }
+
+    }).catch(next)
+});
+
+router.get("/logout", (req, res, next) => {
+  try {
+    req.session.destroy(() => {
+      res.redirect("/");
+    })
+  } catch(error) {
+    console.log("Error logging out : ", error);
+    res.redirect("/");
+  }
 });
 
 module.exports = router;
