@@ -6,6 +6,7 @@ const schema = new Schema({
   ref: {type: String, unique:true, required:true},
   sizes: [{type: Number, required:true}],
   description: String,
+  image: {type:String, required:true},
   price: {type: Number, required:true},
   category: {type: String, required:true, enum:["men", "women", "kids"]},
   id_tags: [{type: Schema.Types.ObjectId, ref:"Tag"}],
