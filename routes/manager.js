@@ -10,6 +10,13 @@ router.get("/all", (req, res, next) => {
     }).catch(next)
 });
 
+router.get("/new", (req, res, next) => {
+  Tag.find()
+    .then(tags => {
+      res.render("products_add", {tags : tags});
+    }).catch(next)
+});
+
 router.get("/edit/:id", (req, res, next) => {
   Promise.all([Sneaker.findById(req.params.id), Tag.find()])
     .then(response => {
@@ -24,6 +31,19 @@ router.post("/edit/:id", (req, res, next) => {
     }).catch(next)
 });
 
+router.post("/new/product", (req, res, next) => {
+  Sneaker.create(req.body)
+    .then(sneaker => {
+      res.redirect("/manager/all");
+    }).catch(next)
+});
+
+router.get("/delete/product/:id", (req, res, next) => {
+  Sneaker.findByIdAndRemove(req.params.id)
+    .then(sneaker => {
+      res.redirect("/manager/all");
+    }).catch(next)
+});
 
 
 module.exports = router;
