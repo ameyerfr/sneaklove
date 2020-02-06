@@ -70,9 +70,10 @@ function eraseSessionMessage() {
 app.use(checkloginStatus);
 app.use(eraseSessionMessage());
 
-// Getting/Using router(s)
-const basePageRouter = require("./routes/index");
-app.use("/", basePageRouter);
+// Routes
+app.use("/", require("./routes/index"));
+app.use("/sneakers", require("./routes/sneakers"));
+app.use("/auth", require("./routes/auth"));
 
 // export the app (check import ./bin/www)
 module.exports = app;
