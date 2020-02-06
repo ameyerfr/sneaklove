@@ -8,7 +8,7 @@ const hbs = require("hbs");
 hbs.registerHelper("ternary", (test, yes, no) => (test ? yes : no));
 
 // add comparison operator feature to hbs templates
-/* 
+/*
 
 USAGE =>
 
