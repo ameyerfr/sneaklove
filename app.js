@@ -18,7 +18,7 @@ app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 app.use(express.static("public"));
 hbs.registerPartials(__dirname + "/views/partials");
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -74,6 +74,7 @@ app.use(eraseSessionMessage());
 app.use("/", require("./routes/index"));
 app.use("/sneakers", require("./routes/sneakers"));
 app.use("/auth", require("./routes/auth"));
+app.use("/manager", require("./routes/manager"));
 
 // export the app (check import ./bin/www)
 module.exports = app;
