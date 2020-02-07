@@ -1,6 +1,6 @@
 module.exports = function exposeFlashMessage(req, res, next) {
-    res.locals.status = req.flash("error") ? 'error' : 'success';
-    res.locals.msg = req.flash("error") ? req.flash("error") : req.flash("success");
-    console.log(res.locals.status, res.locals.msg);
-    next();
-  };
+  console.log(req.flash("success"), req.flash("error"))
+  res.locals.success_msg = req.flash("success");
+  res.locals.error_msg = req.flash("error");
+  next();
+};
