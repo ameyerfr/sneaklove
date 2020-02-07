@@ -14,8 +14,7 @@ router.post("/signup", (req, res, next) => {
     .then(dbRes => {
 
       if (dbRes) {
-        // TODO FLASH MESSAGES
-        // req.flash("error", "sorry, email is already taken :/");
+        req.flash("error", "sorry, email is already taken :/");
         return res.redirect("/auth/signup");
       }
 
