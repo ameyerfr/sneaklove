@@ -6,8 +6,6 @@ class APIHandler {
     })
   }
 
-
 }
-
 
 export default APIHandler

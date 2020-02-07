@@ -1,44 +1,53 @@
 <div class="big-container product-manage-wrapper flexed-item">
+
   <form method="POST" action="/manager/edit/{{sneaker._id}}" class="edit-product-form">
+
     <h3 class="form-title"> Edit Sneaker</h3>
+
     <div class="form-item-wrapper flexed-item">
       <label for="sneacker-name" class="label-name label">Model name</label>
       <input id="sneacker-name" name="name" type="text" class="input-text input" placeholder="Nike Air Max 90" value="{{sneaker.name}}">
     </div>
+
     <div class="form-item-wrapper flexed-item">
       <label for="sneacker-ref" class="label-ref label">Réf.</label>
       <input id="sneacker-ref" name="ref" type="text" class="input-text input" placeholder="ex: NV23498" value="{{sneaker.ref}}">
     </div>
+
     <div class="form-item-wrapper flexed-item">
-      <label for="sneacker-size" class="label-ref label">Sizes (hold CTRL+click to select multiple sizes!)</label>
-      <select id="sneacker-size" class="select sneak-select" multiple>
-        <option value="">Choose Sizes </option>
+      <label for="sneacker-size" class="label-ref label">Available sizes</label>
+      <select id="sneacker-size" class="select sneak-select">
         {{#each sneaker.sizes}}
-          <option value="">{{this}}</option>
+        <option value="">{{this}}</option>
         {{/each}}
       </select>
     </div>
+
     <div class="form-item-wrapper flexed-item">
       <label for="sneacker-descr" class="label-descr label">Description</label>
       <input id="sneacker-descr" name="description" type="text" class="input-text input" placeholder="The better sneakers to run" value="{{sneaker.description}}">
     </div>
+
     <div class="form-item-wrapper flexed-item">
       <label for="sneacker-price" class="label-price label">Price</label>
       <input id="sneacker-price" name="price" type="number" class="sneacker-price input" min="1" value="{{sneaker.price}}">
     </div>
+
     <div class="form-item-wrapper flexed-item">
       <label for="sneacker-main-cat" class="label-main-cat label">Main category</label>
       <select id="main_category" name="category" class="select" required>
         <option value="" disabled>Choose main Category...</option>
-        <option value="men" {{#compare category "men" operator="==="}}selected{{/compare}}>Men</option>
-        <option value="women" {{#compare category "women" operator="==="}}selected{{/compare}}>Women</option>
-        <option value="kids" {{#compare category "kids" operator="==="}}selected{{/compare}}>Kids</option>
+        <option value="men" {{#compare sneaker.category "men" operator="==="}}selected{{/compare}}>Men</option>
+        <option value="women" {{#compare sneaker.category "women" operator="==="}}selected{{/compare}}>Women</option>
+        <option value="kids" {{#compare sneaker.category "kids" operator="==="}}selected{{/compare}}>Kids</option>
       </select>
     </div>
+
     <div class="form-item-wrapper flexed-item">
       <label class="label">Tags (hold CTRL+click to select multiple items!)</label>
       {{> form_tags_select}}
     </div>
+
     <button class="button-primary add-sneacker-btn">Edit this sneaker</button>
   </form>
 </div>

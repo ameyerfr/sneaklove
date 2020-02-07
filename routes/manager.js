@@ -24,6 +24,7 @@ router.get("/new", protectRoute, (req, res, next) => {
 router.get("/edit/:id", protectRoute, (req, res, next) => {
   Promise.all([Sneaker.findById(req.params.id), Tag.find()])
     .then(response => {
+      console.log(response[0])
       res.render("product_edit", {sneaker : response[0], tags : response[1]});
     }).catch(next)
 });
@@ -36,10 +37,12 @@ router.post("/edit/:id", protectRoute, (req, res, next) => {
 });
 
 router.post("/new/product", protectRoute, uploader.single("image"), (req, res, next) => {
+
+  // Get the image url from cloudinary & save it in the sneaker object
   if (req.file && req.file.url) {
     req.body.image = req.file.url;
   }
-  
+
   Sneaker.create(req.body)
     .then(sneaker => {
       res.redirect("/manager/all");
