@@ -25,7 +25,8 @@ router.get("/:category", (req, res, next) => {
       res.render("products", {
         category : req.params.category,
         sneakers : response[0],
-        tags : response[1]
+        tags : response[1],
+        scripts : ['sneakers']
       })
     }).catch(next)
 });
@@ -33,7 +34,7 @@ router.get("/:category", (req, res, next) => {
 router.get("/product/:id", (req, res, next) => {
   Sneaker.findById(req.params.id)
     .then(sneaker => {
-      res.render("one_product", {sneaker : sneaker})
+      res.render("one_product", { sneaker : sneaker, scripts : ['sneakers'] })
     }).catch(next)
 });
 
