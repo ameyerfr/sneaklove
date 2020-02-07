@@ -2,7 +2,6 @@ require("dotenv").config();
 require("./config/mongodb"); // database initial setup
 require("./helpers/helpers-hbs"); // utils for hbs templates
 
-
 // base dependencies
 const express = require("express");
 const hbs = require("hbs");
@@ -11,7 +10,6 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
 const cookieParser = require("cookie-parser");
-
 
 // initial config
 app.set("view engine", "hbs");
@@ -78,5 +76,4 @@ app.use("/sneakers", require("./routes/sneakers"));
 app.use("/auth", require("./routes/auth"));
 app.use("/manager", require("./routes/manager"));
 
-// export the app (check import ./bin/www)
 module.exports = app;

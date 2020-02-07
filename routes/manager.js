@@ -1,6 +1,8 @@
 const express = require("express");
 const router  = new express.Router();
+const multer = require("multer");
 const protectRoute = require("./../middlewares/protectRoute.js");
+const uploader = require("./../config/cloudinary.js");
 
 const Sneaker = require("./../models/Sneaker");
 const Tag = require("./../models/Tag");
@@ -33,7 +35,11 @@ router.post("/edit/:id", protectRoute, (req, res, next) => {
     }).catch(next)
 });
 
-router.post("/new/product", protectRoute, (req, res, next) => {
+router.post("/new/product", protectRoute, uploader.single("image"), (req, res, next) => {
+  if (req.file && req.file.url) {
+    req.body.image = req.file.url;
+  }
+  
   Sneaker.create(req.body)
     .then(sneaker => {
       res.redirect("/manager/all");

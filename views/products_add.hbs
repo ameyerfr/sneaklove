@@ -1,5 +1,5 @@
 <div class="big-container product-manage-wrapper flexed-item">
-  <form action="/manager/new/product" method="POST" class="add-product-form" enctype="multiparty/form-data">
+  <form action="/manager/new/product" method="POST" class="add-product-form" enctype="multipart/form-data">
     {{#if msg}}
     <p class="msg {{msg.status}}">{{msg.txt}}</p>
     {{/if}}
@@ -28,8 +28,8 @@
       <input id="sneacker-price" name="price" type="number" class="sneacker-price input" min="1" value="123">
     </div>
     <div class="form-item-wrapper flexed-item">
-      <label for="sneaker-img" class="label-price label">Image URL (Fuck Cloudinary)</label>
-      <input id="sneaker-img" name="image" type="text" class="sneacker-price input" placeholder="http://yourshoelink.com/mything.jpg" value="https://images.cdn.snowleader.com/media/catalog/product/cache/1/image/400x266/0dc2d03fe217f8c83829496872af24a0/o/r/original-nesta-ltd-configurable-coolshoe-cool00083_01.jpg">
+      <label for="sneaker-img" class="label-price label">Image</label>
+      <input id="sneaker-img" name="image" type="file" class="sneacker-price input" placeholder="http://yourshoelink.com/mything.jpg" value="https://images.cdn.snowleader.com/media/catalog/product/cache/1/image/400x266/0dc2d03fe217f8c83829496872af24a0/o/r/original-nesta-ltd-configurable-coolshoe-cool00083_01.jpg">
     </div>
     <div class="form-item-wrapper flexed-item">
       <label for="category" class="label-main-cat label">Main category</label>
