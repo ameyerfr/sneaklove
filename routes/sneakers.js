@@ -1,21 +1,26 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 const Sneaker = require("./../models/Sneaker");
 const Tag = require("./../models/Tag");
 
-router.get("/collection", (req, res, next) => {
-  Promise.all([Sneaker.find(), Tag.find()])
-    .then(response => {
-      res.render("products", {
-        category : "collection",
-        sneakers : response[0],
-        tags : response[1]
-      })
-    }).catch(next)
-});
-
 router.get("/:category", (req, res, next) => {
-  Promise.all([Sneaker.find({category : req.params.category}), Tag.find()])
+
+  const query = req.params.category === 'all' ? {} : {category : req.params.category}
+
+  // Filter by ONE tag
+  if (req.query.tag_id && typeof req.query.tag_id === "string") {
+    query.id_tags = { $in: [ mongoose.Types.ObjectId(req.query.tag_id) ]}
+  }
+
+  // Filter by MULTIPLE tag
+  if (req.query.tag_id && typeof req.query.tag_id === "object") {
+    let inArr = []
+    req.query.tag_id.forEach(tag_id => {inArr.push(mongoose.Types.ObjectId(tag_id))})
+    query.id_tags = { $in: inArr }
+  }
+
+  Promise.all([Sneaker.find(query), Tag.find()])
     .then(response => {
       res.render("products", {
         category : req.params.category,
