@@ -4,6 +4,11 @@
       <h1 class="sneak-name">{{sneaker.name}}</h1>
       <p class="sneak-description">{{sneaker.description}}</p>
       <p class="sneak-ref">Ref. {{sneaker.ref}}</p>
+      <p class="sneak-tag">Tags: 
+      {{#each sneaker.id_tags}}
+        {{this.label}}
+      {{/each}}
+      </p>
     </div>
   </div>
   <div class="flexed-item">
