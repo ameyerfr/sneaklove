@@ -68,8 +68,10 @@ function eraseSessionMessage() {
 }
 
 app.use(checkloginStatus);
-app.use(eraseSessionMessage());
+
 app.use(require("./middlewares/exposeFlashMessage.js"));
+
+// app.use(eraseSessionMessage());
 
 
 // Routes

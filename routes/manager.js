@@ -32,6 +32,7 @@ router.get("/edit/:id", protectRoute, (req, res, next) => {
 router.post("/edit/:id", protectRoute, (req, res, next) => {
   Sneaker.findByIdAndUpdate(req.params.id, req.body)
     .then(sneakers => {
+      req.flash("success", "Product successfully edited!");
       res.redirect("/manager/all");
     }).catch(next)
 });
@@ -45,6 +46,7 @@ router.post("/new/product", protectRoute, uploader.single("image"), (req, res, n
 
   Sneaker.create(req.body)
     .then(sneaker => {
+      req.flash("success", "Product successfully created!");
       res.redirect("/manager/all");
     }).catch(next)
 });
@@ -52,6 +54,7 @@ router.post("/new/product", protectRoute, uploader.single("image"), (req, res, n
 router.get("/delete/product/:id", protectRoute, (req, res, next) => {
   Sneaker.findByIdAndRemove(req.params.id)
     .then(sneaker => {
+      req.flash("success", "Product successfully deleted!");
       res.redirect("/manager/all");
     }).catch(next)
 });

@@ -9,12 +9,18 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", (req, res, next) => {
   const newUser = req.body;
+
+  if (!newUser.email || !newUser.password) {
+    req.flash("error", "Fill the form, dude !");
+    return res.redirect("/auth/signup");
+  }
+
   User
     .findOne({ email: newUser.email })
     .then(dbRes => {
 
       if (dbRes) {
-        req.flash("error", "sorry, email is already taken :/");
+        req.flash("error", "Sorry, email is already taken :/");
         return res.redirect("/auth/signup");
       }
 
@@ -41,7 +47,7 @@ router.post("/signin", (req, res, next) => {
     .then(dbRes => {
 
       if(!dbRes) {
-        // TODO "Login error"
+        req.flash("error", "Wrong credentials man...");
         res.redirect("/auth/signin");
         return;
       }
@@ -52,7 +58,7 @@ router.post("/signin", (req, res, next) => {
         res.redirect("/manager/all");
       } else {
         // Wrong password
-        // TODO "Login error"
+        req.flash("error", "Wrong credentials man...");
         res.redirect("/auth/signin");
       }
 
