@@ -1,8 +1,7 @@
 .manage-products-wrapper {
   padding: 2rem 1.2rem;
-  height: calc(100vh - (84px));
   flex-direction: column;
-  
+
 }
 
 h3.manage-products-title {
@@ -47,4 +46,3 @@ h3.manage-products-title {
 .table-image{
   width: 30px;
 }
-

@@ -45,7 +45,7 @@ router.get("/product/:id", (req, res, next) => {
   Sneaker.findById(req.params.id)
     .populate("id_tags")
     .then(sneaker => {
-      res.render("one_product", { sneaker : sneaker, scripts : ['sneakers'] })
+      res.render("one_product", { sneaker : sneaker})
     }).catch(next)
 });
 
